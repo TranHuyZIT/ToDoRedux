@@ -1,6 +1,6 @@
 export const addTodoAction = (data) => (
     {
-        type: 'todoList/addToDo',
+        type: 'todoList/addTodo',
         payload: data
 }
 )
