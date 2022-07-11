@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTodoAction } from '../../redux/actions';
 import { v4 as uuidv4 } from 'uuid';
 import {useState} from 'react'
+import { remainingToDoSelector} from '../../redux/selector';
 export default function TodoList() {
   const dispatch = useDispatch()
-  const todoList = useSelector(state => state.todoList);
+  const todoList = useSelector(remainingToDoSelector);
   const [toDoName, setToDoName] = useState('');
   const [toDopriority, setToDoPriority] = useState('Medium');
   const handleAddButton = () =>{

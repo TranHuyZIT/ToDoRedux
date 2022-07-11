@@ -5,9 +5,6 @@ const initState = {
         priority: []
     },
     todoList: [
-        {id: 1, name: 'Learn Yoga', completed: false, priority: 'Medium'},
-        {id: 2, name: 'Learn Redux', completed: false, priority: 'High'},
-        {id: 3, name: 'Learn Javascript', completed: false, priority: 'Low'},
     ]
 }
 const rootReducer = (state = initState, action) => {
@@ -20,6 +17,14 @@ const rootReducer = (state = initState, action) => {
                     ...state.todoList,
                     action.payload
                 ]
+            }
+        case 'filters/searchTextChange':
+            return{
+                ...state,
+                filter:{
+                    ...state.filter,
+                    search: action.payload
+                }
             }
         default:
             return state;
