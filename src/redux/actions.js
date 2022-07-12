@@ -5,9 +5,24 @@ export const addTodoAction = (data) => (
     }
 )
 
+export const setCompleteToDoAction = (data) => (
+    {
+        type: 'todoList/setCompleteToDo',
+        payload: data
+    }
+)
+
 export const filterSearchChangeAction = (data) => (
     {
         type: 'filters/searchTextChange',
         payload: data
     }
 )
+
+export const filterStatusChangeAction = (data) => (
+    {
+        type: 'filters/statusChange',
+        payload: data
+    }
+)
+
