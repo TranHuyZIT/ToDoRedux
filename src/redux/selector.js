@@ -19,7 +19,6 @@ const prioritiesFilterSelector = (state) => {
     return state.filters.priority;
 }
 export const remainingToDoSelector = createSelector(toDoListSelector, searchTextFilterSelector, statusFilterSelector, prioritiesFilterSelector, (toDoList, searchText, status, priorities)=>{
-    console.log(priorities.length)
     if (status === 'All'){
         return toDoList.filter((toDo) => {
             return toDo.name.includes(searchText) && (priorities.includes(toDo.priority) || priorities.length === 0);

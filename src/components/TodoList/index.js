@@ -5,11 +5,19 @@ import { addTodoAction } from '../../redux/actions';
 import { v4 as uuidv4 } from 'uuid';
 import {useState} from 'react'
 import { remainingToDoSelector} from '../../redux/selector';
+
+const priorityMapping = {
+  High: 10,
+  Medium: 9,
+  Low: 8
+}
+
 export default function TodoList() {
   const dispatch = useDispatch()
   const todoList = useSelector(remainingToDoSelector);
   const [toDoName, setToDoName] = useState('');
   const [toDopriority, setToDoPriority] = useState('Medium');
+  const [sorted, setSorted] = useState(false)
   const handleAddButton = () =>{
     dispatch(addTodoAction(
       {
@@ -21,7 +29,10 @@ export default function TodoList() {
     ))
     setToDoName('');
   }
-
+  const handleSortButton = () => {
+    todoList.sort(function(a, b){return priorityMapping[b.priority] - priorityMapping[a.priority]});
+    setSorted(!sorted);
+  }
   const handleNameChanged = (event) => {
     setToDoName(event.target.value);
   }
@@ -53,6 +64,9 @@ export default function TodoList() {
           </Select>
           <Button type='primary' onClick={handleAddButton}>
             Add
+          </Button>
+          <Button style={{ marginLeft: '5px', backgroundColor: 'gray', color: 'white' }} type='default' onClick={handleSortButton}>
+            Sort
           </Button>
         </Input.Group>
       </Col>
