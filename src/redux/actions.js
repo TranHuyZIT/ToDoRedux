@@ -26,3 +26,10 @@ export const filterStatusChangeAction = (data) => (
     }
 )
 
+export const filterPrioritiesChangeAction = (data) => (
+    {
+        type: 'filters/prioritiesChange',
+        payload: data
+    }
+)
+

@@ -22,7 +22,6 @@ const toDoReducer = (state = initState, action) => {
                 }
                 return toDo;
             })
-            console.log(newToDoList)
             return newToDoList;
         default:
             return state;

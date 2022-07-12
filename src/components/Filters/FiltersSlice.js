@@ -16,6 +16,11 @@ const filtersReducer = (state = initState, action) => {
                 ...state,
                 status: action.payload
             }
+        case 'filters/prioritiesChange':
+            return {
+                ... state,
+                priority: action.payload
+            }
         default:
             return state;
     }   
