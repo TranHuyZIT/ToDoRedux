@@ -1,11 +1,11 @@
 import { Col, Row, Input, Button, Select, Tag } from 'antd';
 import Todo from '../Todo';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodoAction } from '../../redux/actions';
+// import { addTodoAction } from '../../redux/actions';
 import { v4 as uuidv4 } from 'uuid';
 import {useState} from 'react'
 import { remainingToDoSelector} from '../../redux/selector';
-
+import toDoSlice from './ToDoSlice';
 const priorityMapping = {
   High: 10,
   Medium: 9,
@@ -19,7 +19,7 @@ export default function TodoList() {
   const [toDopriority, setToDoPriority] = useState('Medium');
   const [sorted, setSorted] = useState(false)
   const handleAddButton = () =>{
-    dispatch(addTodoAction(
+    dispatch(toDoSlice.actions.addTodo(
       {
         id: uuidv4(), 
         name: toDoName, 
@@ -36,9 +36,9 @@ export default function TodoList() {
   const handleNameChanged = (event) => {
     setToDoName(event.target.value);
   }
-  const handleCompletedChanged = (event) => {
-    setToDoName(event.value);
-  }
+  // const handleCompletedChanged = (event) => {
+  //   setToDoName(event.value);
+  // }
   const handlePriorityChanged = (value) => {
     setToDoPriority(value);
   }
