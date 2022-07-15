@@ -43,7 +43,7 @@ export default function Filters() {
         >
           Search
         </Typography.Paragraph>
-        <Search placeholder='input search text' value={inputSearch} onChange={handleSearchChange}/>
+        <Search placeholder='Input search text' value={inputSearch} onChange={handleSearchChange}/>
       </Col>
       <Col sm={24}>
         <Typography.Paragraph
@@ -51,10 +51,11 @@ export default function Filters() {
         >
           Filter By Status
         </Typography.Paragraph>
-        <Radio.Group onChange={handleStatusChange}>
+
+        <Radio.Group style={{display: 'flex', alignItems: 'center', justifyContent:'center'}} onChange={handleStatusChange}>
           <Radio defaultChecked value='All'>All</Radio>
           <Radio value='Completed'>Completed</Radio>
-          <Radio value='Todo'>To do</Radio>
+          <Radio value='Todo'>Uncompleted</Radio>
         </Radio.Group>
       </Col>
       <Col sm={24}>
@@ -66,7 +67,7 @@ export default function Filters() {
         <Select
           mode='multiple'
           allowClear
-          placeholder='Please select'
+          placeholder='Please select priority'
           style={{ width: '100%' }}
           onChange={handlePriorityChanged}
         >

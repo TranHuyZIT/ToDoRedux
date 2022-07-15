@@ -1,6 +1,9 @@
 import { Row, Tag, Checkbox } from 'antd';
+import { DeleteTwoTone} from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useDispatch} from 'react-redux';
+
+import './Todo.css'
 // import { setCompleteToDoAction } from '../../redux/actions';
 import toDoSlice from '../TodoList/ToDoSlice';
 const priorityColorMapping = {
@@ -17,6 +20,10 @@ export default function Todo({ name, priority, completed }) {
     setChecked(!checked);
   };
 
+  const handleDelete = (name) => {
+    dispatch(toDoSlice.actions.deleteToDo(name));
+  }
+
   useEffect(()=>{
     dispatch(toDoSlice.actions.setCompleteToDo({
       name,
@@ -32,9 +39,12 @@ export default function Todo({ name, priority, completed }) {
         ...(checked ? { opacity: 0.5, textDecoration: 'line-through' } : {}),
       }}
     >
-      <Checkbox checked={checked} onChange={toggleCheckbox}>
-        {name}
-      </Checkbox>
+      <div>
+        <DeleteTwoTone className='delete-icon' onClick={() => {handleDelete(name)}}/>
+          <Checkbox checked={checked} onChange={toggleCheckbox}>
+            {name}
+          </Checkbox>
+      </div>
       <Tag color={priorityColorMapping[priority]} style={{ margin: 0 }}>
         {priority}
       </Tag>

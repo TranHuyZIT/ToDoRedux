@@ -40,6 +40,15 @@ const toDoSlice = createSlice({
         setCompleteToDo: (state, action)=>{
             const toDo = state.find((toDo) => toDo.name === action.payload.name);
             toDo.completed = action.payload.completed
+        },
+        deleteToDo: (state, action) => {
+            state.map((toDo, index) => {
+                if (toDo.name === action.payload){
+                    state.splice(index, 1);
+                    return;
+                }
+            });
+
         }
     }
 })
