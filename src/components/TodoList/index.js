@@ -6,11 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {useState} from 'react'
 import { remainingToDoSelector} from '../../redux/selector';
 import toDoSlice from './ToDoSlice';
-const priorityMapping = {
-  High: 10,
-  Medium: 9,
-  Low: 8
-}
+
 
 export default function TodoList() {
   const dispatch = useDispatch()
@@ -30,15 +26,12 @@ export default function TodoList() {
     setToDoName('');
   }
   const handleSortButton = () => {
-    todoList.sort(function(a, b){return priorityMapping[b.priority] - priorityMapping[a.priority]});
+    dispatch(toDoSlice.actions.sortToDo());
     setSorted(!sorted);
   }
   const handleNameChanged = (event) => {
     setToDoName(event.target.value);
   }
-  // const handleCompletedChanged = (event) => {
-  //   setToDoName(event.value);
-  // }
   const handlePriorityChanged = (value) => {
     setToDoPriority(value);
   }

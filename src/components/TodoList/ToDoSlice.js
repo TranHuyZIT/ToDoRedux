@@ -29,7 +29,11 @@
 // }
 // export default toDoReducer;
 import { createSlice } from "@reduxjs/toolkit";
-
+const priorityMapping = {
+    High: 10,
+    Medium: 9,
+    Low: 8
+  }
 const toDoSlice = createSlice({
     name: 'todoList',
     initialState: [],
@@ -49,6 +53,9 @@ const toDoSlice = createSlice({
                 }
             });
 
+        },
+        sortToDo: (state, action) => {
+            state.sort(function(a, b){return priorityMapping[b.priority] - priorityMapping[a.priority]});
         }
     }
 })
