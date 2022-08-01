@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {useState} from 'react'
 import { remainingToDoSelector} from '../../redux/selector';
-import toDoSlice from './ToDoSlice';
-
+import toDoSlice, { addNewTodo } from './ToDoSlice';
 
 export default function TodoList() {
   const dispatch = useDispatch()
@@ -15,14 +14,20 @@ export default function TodoList() {
   const [toDopriority, setToDoPriority] = useState('Medium');
   const [sorted, setSorted] = useState(false)
   const handleAddButton = () =>{
-    dispatch(toDoSlice.actions.addTodo(
-      {
-        id: uuidv4(), 
-        name: toDoName, 
-        completed: false, 
-        priority: toDopriority
-      }
-    ))
+    // dispatch(toDoSlice.actions.addTodo(
+    //   {
+    //     id: uuidv4(), 
+    //     name: toDoName, 
+    //     completed: false, 
+    //     priority: toDopriority
+    //   }
+    // ))
+    dispatch(addNewTodo({
+      id: uuidv4(), 
+      name: toDoName, 
+      completed: false, 
+      priority: toDopriority
+    }))
     setToDoName('');
   }
   const handleSortButton = () => {

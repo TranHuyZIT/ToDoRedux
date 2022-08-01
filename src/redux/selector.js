@@ -1,10 +1,11 @@
 import { createSelector } from "reselect";
+import TodoList from "../components/TodoList";
 
 
 
 const toDoListSelector = (state) => {
-    
-    return state.toDoList;
+    console.log(state);
+    return state.toDoList.todos;
 }
 
 const searchTextFilterSelector = (state) => {
