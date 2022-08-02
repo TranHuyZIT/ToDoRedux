@@ -69,6 +69,10 @@ const toDoSlice = createSlice({
         .addCase(addNewTodo.fulfilled, (state,action) => {
             state.todos.push(action.payload);
         })
+        .addCase(updateToDo.fulfilled, (state, action) => {
+            const toDo = state.todos.find((toDo) => toDo.name === action.payload.name);
+            toDo.completed = action.payload.completed
+        })
     }
 })
 export default toDoSlice;
@@ -85,5 +89,14 @@ export const addNewTodo = createAsyncThunk('/api/addtodo', async (newTodo) => {
     })
     console.log(res);
     const data = await res.json();
+    return data.todos;
+})
+export const updateToDo = createAsyncThunk('/api/updateTodo', async (updatedToDo) => {
+    const res = await fetch('/api/updateTodo', {
+        method: 'POST',
+        body: JSON.stringify(updatedToDo)
+    });
+    const data = await res.json();
+    console.log(data)
     return data.todos;
 })

@@ -5,7 +5,7 @@ import { useDispatch} from 'react-redux';
 
 import './Todo.css'
 // import { setCompleteToDoAction } from '../../redux/actions';
-import toDoSlice from '../TodoList/ToDoSlice';
+import toDoSlice, { updateToDo } from '../TodoList/ToDoSlice';
 const priorityColorMapping = {
   High: 'red',
   Medium: 'blue',
@@ -25,7 +25,11 @@ export default function Todo({ name, priority, completed }) {
   }
 
   useEffect(()=>{
-    dispatch(toDoSlice.actions.setCompleteToDo({
+    // dispatch(toDoSlice.actions.setCompleteToDo({
+    //   name,
+    //   completed: checked
+    // }))
+    dispatch(updateToDo({
       name,
       completed: checked
     }))
