@@ -18,7 +18,8 @@ export default function Todo({ name, priority, completed }) {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(completed);
 
-  const toDoStatus = useSelector(toDoStatusSelector);
+  // const toDoStatus = useSelector(toDoStatusSelector);
+  const toDoStatus = true;
 
   const toggleCheckbox = () => {
     setChecked(!checked);
