@@ -15,12 +15,15 @@ export const setUpServer = () => {
             })
             this.post('/api/updateTodo', (schema, request) => {
 
-                console.log(schema)
                 const payload = JSON.parse(request.requestBody);
-                console.log(payload)
                 const currentToDo = schema.todos.findBy({name: payload.name});
-                console.log(currentToDo)
                 currentToDo.update({completed: payload.completed});
+                return currentToDo;
+            })
+            this.post('/api/deleteTodo', (schema, request) => {
+                const payload = JSON.parse(request.requestBody);
+                const currentToDo = schema.todos.findBy({name: payload});
+                currentToDo.destroy();
                 return currentToDo;
             })
         }

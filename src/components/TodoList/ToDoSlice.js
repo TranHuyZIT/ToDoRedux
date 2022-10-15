@@ -59,7 +59,16 @@ const toDoSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchTodos.pending, (state, action) => {
+        builder.addCase(fetchTodos.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(addNewTodo.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(updateToDo.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(deleteToDo.pending, (state) => {
             state.status = 'loading';
         })
         .addCase(fetchTodos.fulfilled, (state, action) => {
@@ -67,11 +76,22 @@ const toDoSlice = createSlice({
             state.todos = action.payload;
         })
         .addCase(addNewTodo.fulfilled, (state,action) => {
+            state.status = 'idle';
             state.todos.push(action.payload);
         })
         .addCase(updateToDo.fulfilled, (state, action) => {
             const toDo = state.todos.find((toDo) => toDo.name === action.payload.name);
+            state.status = 'idle';
             toDo.completed = action.payload.completed
+        })
+        .addCase(deleteToDo.fulfilled, (state, action) => {
+            state.status = 'idle';
+            state.todos.map((toDo, index) => {
+                if (toDo.name === action.payload.name){
+                    state.todos.splice(index, 1);
+                    return;
+                }
+            });
         })
     }
 })
@@ -87,7 +107,6 @@ export const addNewTodo = createAsyncThunk('/api/addtodo', async (newTodo) => {
         method: 'POST',
         body: JSON.stringify(newTodo)
     })
-    console.log(res);
     const data = await res.json();
     return data.todos;
 })
@@ -97,6 +116,13 @@ export const updateToDo = createAsyncThunk('/api/updateTodo', async (updatedToDo
         body: JSON.stringify(updatedToDo)
     });
     const data = await res.json();
-    console.log(data)
+    return data.todos;
+})
+export const deleteToDo = createAsyncThunk('/api/deleteTodo', async (deletedTodoName) => {
+    const res = await fetch('/api/deleteTodo', {
+        method: 'POST',
+        body: JSON.stringify(deletedTodoName)
+    })
+    const data = await res.json();
     return data.todos;
 })

@@ -1,10 +1,10 @@
 import { createSelector } from "reselect";
-import TodoList from "../components/TodoList";
 
-
+export const toDoStatusSelector = (state) => {
+    return state.toDoList.status;
+}
 
 const toDoListSelector = (state) => {
-    console.log(state);
     return state.toDoList.todos;
 }
 
